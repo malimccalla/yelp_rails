@@ -10,4 +10,16 @@ feature 'restaurants' do
     end
   end
 
+  context 'restaurants have been added' do
+    before do
+      Restaurant.create(name: 'Jack & Mali\'s Meat Hook')
+    end
+
+    scenario 'display restaurants' do
+      visit '/restaurants'
+      expect(page).to have_content('Jack & Mali\'s Meat Hook')
+      expect(page).not_to have_content('No restaurants yet')
+    end
+  end
+
 end

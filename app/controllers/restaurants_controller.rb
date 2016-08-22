@@ -1,5 +1,7 @@
 class RestaurantsController < ApplicationController
 
+  before_action :get_by_id, only: [:show, :edit, :update, :destroy]
+
   def index
     @restaurants = Restaurant.all
   end
@@ -14,28 +16,27 @@ class RestaurantsController < ApplicationController
   end
 
   def show
-    @restaurant = Restaurant.find(params[:id])
   end
 
   def edit
-    @restaurant = Restaurant.find(params[:id])
   end
 
   def update
-    @restaurant = Restaurant.find(params[:id])
     @restaurant.update(restaurant_params)
-
     redirect_to '/restaurants'
   end
 
   def destroy
-    @restaurant = Restaurant.find(params[:id])
     @restaurant.destroy
     flash[:notice] = 'Restaurant deleted successfully'
     redirect_to '/restaurants'
   end
 
   private
+
+  def get_by_id
+    @restaurant = Restaurant.find(params[:id])
+  end
 
   def restaurant_params
     params.require(:restaurant).permit(:name, :description)

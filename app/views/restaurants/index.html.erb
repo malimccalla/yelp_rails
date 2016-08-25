@@ -1,25 +1,33 @@
 <h3><a href='restaurants/new'>Add a restaurant</a></h3>
 
-<% if @restaurants.any? %>
-  <% @restaurants.each do |restaurant| %>
-    <h2><%= link_to restaurant.name, restaurant_path(restaurant) %></h2>
-    <% if restaurant.reviews.any? %>
-      <h3> Reviews: </h3>
-      <% restaurant.reviews.each do |review| %>
-        <%= review.thoughts + " - #{review.user.email}" %> <br>
-        <%= "This restaurant has a rating of #{review.rating} out of 5" %> <br>
-      <% end %>
+<div class="restaurants">
+  <% if @restaurants.any? %>
+    <% @restaurants.each do |restaurant| %>
+      <div id="restaurant-title">
+        <h2><%= link_to restaurant.name, restaurant_path(restaurant) %></h2>
+      </div>
+      <div id="reviews">
+        <% if restaurant.reviews.any? %>
+          <h3> Reviews: </h3>
+          <% restaurant.reviews.each do |review| %>
+          <%= review.thoughts + " - #{review.user.email}" %> <br>
+          <%= "This restaurant has a rating of #{review.rating} out of 5" %> <br>
+          <% end %>
+        <% end %>
+      </div>
+      <div id="buttons">
+        <% if restaurant.user == current_user %>
+          <%= link_to "Edit #{restaurant.name}", edit_restaurant_path(restaurant) %>
+          <%= link_to "Delete #{restaurant.name}", restaurant_path(restaurant), method: :delete %>
+        <% end %>
+        <% if current_user %>
+          <% if !current_user.has_reviewed?(restaurant) %>
+            <%= link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant) %>
+          <% end %>
+        <% end %>
+      </div>
     <% end %>
-    <% if restaurant.user == current_user %>
-      <%= link_to "Edit #{restaurant.name}", edit_restaurant_path(restaurant) %>
-      <%= link_to "Delete #{restaurant.name}", restaurant_path(restaurant), method: :delete %>
-    <% end %>
-    <% if current_user %>
-      <% if !current_user.has_reviewed?(restaurant) %>
-        <%= link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant) %>
-      <% end %>
-    <% end %>
-  <% end %>
-<% else %>
-  <h1>No restaurants yet</h1>
-<%end%>
+  <% else %>
+    <h1>No restaurants yet</h1>
+  <%end%>
+</div>

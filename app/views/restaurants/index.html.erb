@@ -8,10 +8,10 @@
       </div>
       <div id="reviews">
         <% if restaurant.reviews.any? %>
+          <h4>Average rating: <%= restaurant.average_rating.to_i %></h4>
           <h3> Reviews: </h3>
           <% restaurant.reviews.each do |review| %>
           <%= review.thoughts + " - #{review.user.email}" %> <br>
-          <%= "This restaurant has a rating of #{review.rating} out of 5" %> <br>
           <% end %>
         <% end %>
       </div>

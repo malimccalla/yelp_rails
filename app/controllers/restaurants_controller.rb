@@ -28,14 +28,18 @@ class RestaurantsController < ApplicationController
   end
 
   def update
-    @restaurant.update(restaurant_params)
-    redirect_to '/restaurants'
+    if @restaurant.user == current_user
+      @restaurant.update(restaurant_params)
+      redirect_to '/restaurants'
+    end
   end
 
   def destroy
-    @restaurant.destroy
-    flash[:notice] = 'Restaurant deleted successfully'
-    redirect_to '/restaurants'
+    if @restaurant.user == current_user
+      @restaurant.destroy
+      flash[:notice] = 'Restaurant deleted successfully'
+      redirect_to '/restaurants'
+    end
   end
 
   private

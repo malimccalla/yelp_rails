@@ -104,8 +104,7 @@ end
 
      scenario 'a user can not edit a restaurant' do
        visit '/restaurants'
-       click_link 'Edit KFC'
-       expect(current_path).to eq '/users/sign_in'
+       expect(page).not_to have_content 'Edit KFC'
      end
    end
 
@@ -119,8 +118,7 @@ end
 
      scenario 'can not delete a restaurant' do
        visit '/restaurants'
-       click_link 'Delete KFC'
-       expect(current_path).to eq '/users/sign_in'
+       expect(page).not_to have_content 'Delete KFC'
      end
    end
 

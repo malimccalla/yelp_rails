@@ -10,6 +10,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'omniauth-facebook'
 gem 'poltergeist'
 gem 'database_cleaner'
+gem 'paperclip'
 
 gem 'jquery-rails'
 

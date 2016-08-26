@@ -7,6 +7,8 @@ class ReviewsController < ApplicationController
     @review = Review.new
   end
 
+
+
   def create
     @restaurant = Restaurant.find(params[:restaurant_id])
     @review = @restaurant.reviews.build_with_user(review_params, current_user)

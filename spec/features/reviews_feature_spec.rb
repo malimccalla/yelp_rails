@@ -28,7 +28,7 @@ feature 'reviewing' do
 
 
 
-  xscenario 'displays an average rating for all reviews' do
+  scenario 'displays an average rating for all reviews' do
     leave_review('So so', '3')
     user_sign_out
     visit '/'

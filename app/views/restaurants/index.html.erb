@@ -12,7 +12,9 @@
           <h3> Reviews: </h3>
           <% restaurant.reviews.each do |review| %>
             <%= review.thoughts + " - #{review.user.email}" %> <br>
-            <p><%= pluralize review.endorsements.count, 'endorsement' %></p>
+            <p>
+              <%= pluralize review.endorsements.count, 'endorsement' %>
+            </p>
           <% end %>
         <% end %>
       </div>
